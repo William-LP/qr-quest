@@ -10,7 +10,7 @@ import "leaflet/dist/leaflet.css"
 // import LeafletControlGeocoder from "./LeafletControlGeocoder";
 
 
-const position = [48.8566, 2.3522]
+const position: [number, number] = [48.8566, 2.3522]
 
 type Coordinates = {
     lat: number;
@@ -69,7 +69,7 @@ const map = ({ checkpoints, setCheckpoints }: { checkpoints: CheckPoint[], setCh
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    maxZoom="25"
+                    maxZoom={25}
                 />
 
                 <MarkerClusterGroup
