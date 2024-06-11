@@ -32,8 +32,8 @@ const CardComponent = ({ checkpoints, setCheckpoints, id }: { checkpoints: Check
                     ? {
                         ...checkpoint,
                         coordinates: {
-                            lat: checkpoints[id].coordinates.lat,
-                            long: checkpoints[id].coordinates.long
+                            lat: checkpoints[id].lat,
+                            long: checkpoints[id].long
                         },
                         name: name,
                         hint: hint

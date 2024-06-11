@@ -44,6 +44,7 @@ export default function Home() {
 
   const handleLaunchYourAdventure = () => {
     // onImageDownload()
+    console.log(checkpoints)
   }
 
 
