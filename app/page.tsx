@@ -9,17 +9,8 @@ import QRCode from "react-qr-code"
 
 import { useState } from 'react';
 
-type CheckPoint = {
-  coordinates: Coordinates
-  hint: string
-  name: string
-  id: number
-}
+import { CheckPoint } from "@/types/types"
 
-type Coordinates = {
-  lat: number;
-  long: number;
-}
 
 
 const Map = dynamic(() => import('@/components/map'), { ssr: false });
