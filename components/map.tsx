@@ -7,22 +7,15 @@ import { Icon } from "leaflet"
 import MarkerClusterGroup from "react-leaflet-cluster"
 import "leaflet/dist/leaflet.css"
 
+import { CheckPoint } from "@/types/types"
+
+
 // import LeafletControlGeocoder from "./LeafletControlGeocoder";
 
 
 const position: [number, number] = [48.8566, 2.3522]
 
-type Coordinates = {
-    lat: number;
-    long: number;
-}
 
-type CheckPoint = {
-    coordinates: Coordinates
-    hint: string
-    name: string
-    id: number
-}
 
 const customIcon = new Icon({
     // iconUrl: require("./img/location-marker.png"),

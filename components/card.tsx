@@ -3,6 +3,8 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 
+import { CheckPoint } from "@/types/types"
+
 import {
     AlertDialog,
     AlertDialogAction,
@@ -17,18 +19,6 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { MapPinOff, Save, Pencil } from "lucide-react"
 import { Input } from "@/components/ui/input"
-
-type CheckPoint = {
-    coordinates: Coordinates
-    hint: string
-    name: string
-    id: number
-}
-
-type Coordinates = {
-    lat: number;
-    long: number;
-}
 
 
 const CardComponent = ({ checkpoints, setCheckpoints, id }: { checkpoints: CheckPoint[], setCheckpoints: React.Dispatch<React.SetStateAction<CheckPoint[]>>, id: number }) => {

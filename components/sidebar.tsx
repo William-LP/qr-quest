@@ -4,23 +4,16 @@ import Card from "@/components/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
 // import { Separator } from "@/components/ui/separator"
 
+import { CheckPoint } from "@/types/types"
+
+
+
 const tags = Array.from({ length: 50 }).map(
     (_, i, a) => `v1.2.0-beta.${a.length - i}`
 )
 
 
-type CheckPoint = {
-    coordinates: Coordinates
-    hint: string
-    name: string
-    id: number
-}
 
-type Coordinates = {
-    lat: number;
-    long: number;
-
-}
 
 const sidebar = ({ checkpoints, setCheckpoints }: { checkpoints: CheckPoint[], setCheckpoints: React.Dispatch<React.SetStateAction<CheckPoint[]>> }) => {
     return (
