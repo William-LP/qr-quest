@@ -1,6 +1,7 @@
-"use client"
+'use client'
 
-import Map from "@/components/map"
+import dynamic from 'next/dynamic'
+
 import SideBar from "@/components/sidebar"
 import { Button } from "@/components/ui/button";
 import { Rocket } from "lucide-react"
@@ -19,6 +20,9 @@ type Coordinates = {
   lat: number;
   long: number;
 }
+
+
+const Map = dynamic(() => import('@/components/map'), { ssr: false });
 
 
 export default function Home() {
