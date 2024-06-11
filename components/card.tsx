@@ -86,14 +86,14 @@ const CardComponent = ({ checkpoints, setCheckpoints, id }: { checkpoints: Check
                         <AlertDialogHeader>
                             <AlertDialogTitle>Edit the checkpoint</AlertDialogTitle>
                             <AlertDialogDescription>
-                                <div className="grid w-full max-w-sm items-center gap-1.5 mb-4">
+                                <span className="grid w-full max-w-sm items-center gap-1.5 mb-4">
                                     <Label htmlFor="name">Give this place a name :</Label>
                                     <Input type="text" id="name" placeholder="Give this place a name" value={name} onChange={e => setName(e.target.value)} />
-                                </div>
-                                <div className="grid w-full gap-1.5">
+                                </span>
+                                <span className="grid w-full gap-1.5">
                                     <Label htmlFor="hint">Write the hint that will bring the players here :</Label>
                                     <Textarea placeholder="Write the hint that will bring the players here" value={hint} id="hint" onChange={e => setHint(e.target.value)} />
-                                </div>
+                                </span>
                             </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
