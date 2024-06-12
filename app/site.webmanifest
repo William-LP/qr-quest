@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "QR Quest",
+    "short_name": "QR Quest",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

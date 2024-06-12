@@ -7,6 +7,7 @@ export type Adventure = {
 export type CheckPoint = {
     hint: string
     name: string
+    rank: number
     id: string
     lat: number
     long: number

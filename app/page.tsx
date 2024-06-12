@@ -8,8 +8,10 @@ import { Rocket } from "lucide-react"
 import QRCode from "react-qr-code"
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation'
 
-import { CheckPoint } from "@/types/types"
+import { Adventure, CheckPoint } from "@/types/types"
+import { log } from 'console';
 
 
 
@@ -18,6 +20,7 @@ const Map = dynamic(() => import('@/components/map'), { ssr: false });
 
 export default function Home() {
   const [checkpoints, setCheckpoints] = useState<CheckPoint[]>([]);
+  const router = useRouter()
 
   // const onImageDownload = () => {
   //   checkpoints.map((c) => {
@@ -42,9 +45,24 @@ export default function Home() {
   //   })
   // };
 
-  const handleLaunchYourAdventure = () => {
+  const handleLaunchYourAdventure = async () => {
+
+    const adventure = {
+      checkPoints: checkpoints
+    }
+
+
     // onImageDownload()
-    console.log(checkpoints)
+    const res = await fetch('/api/adventure', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(adventure),
+    })
+    const { adventure: { id } } = await res.json()
+    router.push(`/${id}`)
+
   }
 
 

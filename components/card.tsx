@@ -44,15 +44,11 @@ const CardComponent = ({ checkpoints, setCheckpoints, id }: { checkpoints: Check
     }
 
     const handleDeleteCheckpoint = (id: number, checkpoints: CheckPoint[], setCheckpoints: React.Dispatch<React.SetStateAction<CheckPoint[]>>) => {
-        console.log("old")
-        console.log(checkpoints)
 
         const newCheckpoints = checkpoints
         if (id > -1) {
             newCheckpoints.splice(id, 1)
         }
-        console.log("new")
-        console.log(newCheckpoints)
         setCheckpoints(
             newCheckpoints
         );

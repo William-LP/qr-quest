@@ -20,6 +20,7 @@ model Checkpoint {
     name        String    @default("")
     latitude    Float
     longitude   Float
+    rank        Int
     Adventure   Adventure @relation(fields: [adventureId], references: [id])
     adventureId String
 }

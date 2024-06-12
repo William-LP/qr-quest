@@ -44,6 +44,7 @@ const map = ({ checkpoints, setCheckpoints }: { checkpoints: CheckPoint[], setCh
 
                             lat: e.latlng.lat,
                             long: e.latlng.lng,
+                            rank: id,
                             hint: "",
                             name: `${e.latlng.lat} / ${e.latlng.lng}`,
                             id: id.toString()

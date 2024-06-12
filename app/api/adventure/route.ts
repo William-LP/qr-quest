@@ -24,13 +24,15 @@ export async function POST(request: NextRequest) {
     try {
         const adventure = await prisma.adventure.create({
             data: {
-                createdAt: body.createdAt,
+                // createdAt: body.createdAt,
             }
         });
+
 
         const checkpointsData = body.checkPoints.map(cp => ({
             hint: cp.hint,
             name: cp.name,
+            rank: cp.rank,
             latitude: cp.lat,
             longitude: cp.long,
             adventureId: adventure.id,
@@ -39,6 +41,8 @@ export async function POST(request: NextRequest) {
         const createdCheckpoints = await prisma.checkpoint.createMany({
             data: checkpointsData
         });
+
+
 
         return NextResponse.json({ adventure, createdCheckpoints }, { status: 201 });
     } catch (error: any) {

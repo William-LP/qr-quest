@@ -19,6 +19,7 @@ export async function GET(
         const formattedCheckpoints: CheckPoint[] = checkpoints.map(cp => ({
             id: cp.id,
             hint: cp.hint,
+            rank: cp.rank,
             name: cp.name,
             lat: cp.latitude,
             long: cp.longitude
