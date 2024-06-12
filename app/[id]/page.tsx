@@ -51,7 +51,7 @@ const page = async ({ params: { id } }: Props) => {
             <div>
                 <h1>QR Adventure details</h1>
                 <ul>
-                    {a.checkPoints.map((cp) => <li>{cp.rank}</li>)}
+                    {a.checkPoints.map((cp, index) => <li key={index}>{cp.rank}</li>)}
                 </ul>
             </div>
         );
