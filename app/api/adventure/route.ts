@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     try {
         const adventure = await prisma.adventure.create({
             data: {
-                createdAt: body.createdAt,
+                // createdAt: body.createdAt,
             }
         });
 

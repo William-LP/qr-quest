@@ -44,6 +44,13 @@ export default function Home() {
 
   const handleLaunchYourAdventure = () => {
     // onImageDownload()
+    fetch('/api/adventure', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(checkpoints),
+    })
     console.log(checkpoints)
   }
 
