@@ -1,6 +1,18 @@
-import { Adventure, CheckPoint } from "@/types/types"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+import { Adventure, CheckPoint } from "@/types/types";
 import { PrismaClient } from '@prisma/client';
-import React from 'react'
+import { Mail } from "lucide-react";
+import React from 'react';
 
 const prisma = new PrismaClient();
 
@@ -25,6 +37,7 @@ async function fetchData(id: string) {
         }));
 
         const res: Adventure = {
+            customerId: adventure.customerId as number,
             id: adventure.id,
             createdAt: adventure.createdAt,
             checkPoints: formattedCheckpoints
@@ -35,12 +48,46 @@ async function fetchData(id: string) {
 
 }
 
+
 interface Props {
     params: { id: string };
 }
 
 
 const page = async ({ params: { id } }: Props) => {
+
+
+    async function sendEmail(formData: FormData) {
+        'use server'
+
+
+        const email = formData.get('email')
+
+        if (email) {
+
+            const adventure = await prisma.adventure.findUnique({
+                where: {
+                    id: id
+                }
+            })
+
+            const customer = await prisma.customer.update({
+                where: {
+                    id: adventure?.customerId as number,
+                },
+                data: {
+                    email: email.toString()
+                },
+            })
+
+            console.log(`and now send a email to ${customer}`)
+
+        }
+
+    }
+
+
+
     const a = await fetchData(id)
     if (!a) {
         return (
@@ -49,10 +96,56 @@ const page = async ({ params: { id } }: Props) => {
     } else {
         return (
             <div>
-                <h1>QR Adventure details</h1>
-                <ul>
-                    {a.checkPoints.map((cp, index) => <li key={index}>{cp.rank}</li>)}
-                </ul>
+                <h1>QR Adventure recap`&apos;`</h1>
+
+                {/* 
+                <div className="p-6 sm:p-10">
+                    <div className="max-w-2xl">
+                        <h2 className="text-2xl font-bold mb-4">Company History</h2>
+                        <div className="relative pl-6 grid gap-10 after:absolute after:inset-y-0 after:w-px after:bg-gray-500/20 dark:after:bg-gray-400/20">
+                            {a.checkPoints.map((cp, index) => (
+                                <div className="grid gap-1 text-sm relative">
+                                    <div className="aspect-square w-3 bg-gray-900 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-1 dark:bg-gray-50" />
+                                    <div className="font-medium">{cp.name}</div>
+                                    <div className="text-gray-500 dark:text-gray-400">
+                                        {cp.hint}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div> */}
+
+
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead className="w-[100px]">#</TableHead>
+                            <TableHead>This hint ...</TableHead>
+                            <TableHead className="w-[100px]">={">"}</TableHead>
+                            <TableHead>... brings the players here !</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {a.checkPoints.map((cp, index) => (
+                            <TableRow key={index}>
+                                <TableCell className="font-medium">{cp.rank}</TableCell>
+                                <TableCell>{cp.hint}</TableCell>
+                                <TableCell>={">"}</TableCell>
+                                <TableCell>{cp.name}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+
+                <Separator className="w-1/2 my-10 mx-auto" />
+
+                <div className="w-full max-w-md items-center space-x-2 mx-auto">
+                    <form action={sendEmail}>
+                        <Input className="w-full" type="email" name="email" placeholder="Email" />
+                        <Button type="submit" className="mt-2 w-full"><Mail className="mr-2 h-4 w-4" /> Send me the adventure !</Button>
+                    </form>
+                </div>
             </div>
         );
     }

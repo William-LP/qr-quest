@@ -29,4 +29,12 @@ model Adventure {
     id          String       @id @unique @default(uuid())
     createdAt   DateTime     @default(now())
     checkpoints Checkpoint[]
+    Customer    Customer?    @relation(fields: [customerId], references: [id])
+    customerId  Int?
+}
+
+model Customer {
+    id         Int         @id @default(autoincrement())
+    email      String
+    adventures Adventure[]
 }

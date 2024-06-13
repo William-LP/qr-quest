@@ -2,6 +2,7 @@ export type Adventure = {
     createdAt: Date
     id: string
     checkPoints: CheckPoint[]
+    customerId: number
 }
 
 export type CheckPoint = {

@@ -1,7 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-// import schema from './schema';
 import prisma from '@/prisma/client';
-import { Adventure } from '@/types/types'
+import { Adventure } from '@/types/types';
+import { NextRequest, NextResponse } from 'next/server';
 
 
 export async function GET() {
@@ -21,10 +20,20 @@ export async function POST(request: NextRequest) {
         );
     }
 
+
+
     try {
+
+        const customerId = await prisma.customer.create({
+            data: {
+                email: "user@unknown.com"
+            }
+        });
+
+
         const adventure = await prisma.adventure.create({
             data: {
-                // createdAt: body.createdAt,
+                customerId: customerId.id
             }
         });
 

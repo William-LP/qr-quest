@@ -27,6 +27,7 @@ export async function GET(
         }));
 
         const res: Adventure = {
+            customerId: adventure.customerId as number,
             id: adventure.id,
             createdAt: adventure.createdAt,
             checkPoints: formattedCheckpoints

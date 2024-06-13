@@ -1,17 +1,14 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-
-import SideBar from "@/components/sidebar"
+import SideBar from "@/components/sidebar";
 import { Button } from "@/components/ui/button";
-import { Rocket } from "lucide-react"
-import QRCode from "react-qr-code"
-
+import { CheckPoint } from "@/types/types";
+import { Loader2, Rocket } from "lucide-react";
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'
+import QRCode from "react-qr-code";
 
-import { Adventure, CheckPoint } from "@/types/types"
-import { log } from 'console';
 
 
 
@@ -20,6 +17,7 @@ const Map = dynamic(() => import('@/components/map'), { ssr: false });
 
 export default function Home() {
   const [checkpoints, setCheckpoints] = useState<CheckPoint[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const router = useRouter()
 
   // const onImageDownload = () => {
@@ -46,8 +44,10 @@ export default function Home() {
   // };
 
   const handleLaunchYourAdventure = async () => {
+    setIsLoading(true)
 
     const adventure = {
+      customerId: 0,
       checkPoints: checkpoints
     }
 
@@ -70,8 +70,9 @@ export default function Home() {
     <div>
       <Map checkpoints={checkpoints} setCheckpoints={setCheckpoints} />
       <SideBar checkpoints={checkpoints} setCheckpoints={setCheckpoints} />
-      <Button onClick={handleLaunchYourAdventure} variant="default" style={{ position: "absolute", bottom: 30, right: 50, zIndex: 999, height: "10vh" }}>
-        Launch your adventure <Rocket className="ml-2" />
+      <Button disabled={isLoading} onClick={handleLaunchYourAdventure} variant="default" style={{ position: "absolute", bottom: 30, right: 50, zIndex: 999, height: "10vh" }}>
+        Launch your adventure
+        {isLoading ? <Loader2 className="ml-2 h-4 w-4 animate-spin" /> : <Rocket className="ml-2" />}
       </Button>
 
 
