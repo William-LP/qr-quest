@@ -13,6 +13,8 @@ import { Adventure, CheckPoint } from "@/types/types";
 import { PrismaClient } from '@prisma/client';
 import { Mail } from "lucide-react";
 import React from 'react';
+import { redirect } from "next/navigation";
+
 
 const prisma = new PrismaClient();
 
@@ -56,15 +58,12 @@ interface Props {
 
 const page = async ({ params: { id } }: Props) => {
 
-
     async function sendEmail(formData: FormData) {
         'use server'
 
 
         const email = formData.get('email')
-
         if (email) {
-
             const adventure = await prisma.adventure.findUnique({
                 where: {
                     id: id
@@ -80,6 +79,7 @@ const page = async ({ params: { id } }: Props) => {
                 },
             })
 
+            redirect("/success");
             console.log(`and now send a email to ${customer}`)
 
         }
@@ -95,8 +95,10 @@ const page = async ({ params: { id } }: Props) => {
         )
     } else {
         return (
-            <div>
-                <h1>QR Adventure recap`&apos;`</h1>
+            <div className="pt-5 px-20">
+                <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-center mb-10 underline underline-offset-3">
+                    QR Quest recap&apos;
+                </h1>
 
                 {/* 
                 <div className="p-6 sm:p-10">
@@ -117,13 +119,24 @@ const page = async ({ params: { id } }: Props) => {
                 </div> */}
 
 
-                <Table>
+                <Separator className="w-1/2 my-10 mx-auto" />
+
+
+                <div className="w-full max-w-md items-center space-x-2 mx-auto">
+                    <form action={sendEmail}>
+                        <Input className="w-full" type="email" name="email" placeholder="Email" />
+                        <Button type="submit" className="mt-2 w-full"><Mail className="mr-2 h-4 w-4" />Send me the adventure !</Button>
+                    </form>
+                </div>
+
+                <Separator className="w-1/2 my-10 mx-auto" />
+                <Table className="mb-10">
                     <TableHeader>
                         <TableRow>
                             <TableHead className="w-[100px]">#</TableHead>
-                            <TableHead>This hint ...</TableHead>
+                            <TableHead className="w-2/3">This hint ...</TableHead>
                             <TableHead className="w-[100px]">={">"}</TableHead>
-                            <TableHead>... brings the players here !</TableHead>
+                            <TableHead className="w-1/3">... brings the players here !</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -137,15 +150,6 @@ const page = async ({ params: { id } }: Props) => {
                         ))}
                     </TableBody>
                 </Table>
-
-                <Separator className="w-1/2 my-10 mx-auto" />
-
-                <div className="w-full max-w-md items-center space-x-2 mx-auto">
-                    <form action={sendEmail}>
-                        <Input className="w-full" type="email" name="email" placeholder="Email" />
-                        <Button type="submit" className="mt-2 w-full"><Mail className="mr-2 h-4 w-4" /> Send me the adventure !</Button>
-                    </form>
-                </div>
             </div>
         );
     }

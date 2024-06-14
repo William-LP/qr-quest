@@ -67,7 +67,7 @@ export default function Home() {
 
 
   return (
-    <div>
+    <div style={{ overflow: "hidden", padding: 0, margin: 0, height: "100%" }}>
       <Map checkpoints={checkpoints} setCheckpoints={setCheckpoints} />
       <SideBar checkpoints={checkpoints} setCheckpoints={setCheckpoints} />
       <Button disabled={isLoading} onClick={handleLaunchYourAdventure} variant="default" style={{ position: "absolute", bottom: 30, right: 50, zIndex: 999, height: "10vh" }}>
