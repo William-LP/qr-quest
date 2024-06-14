@@ -14,6 +14,7 @@ import { PrismaClient } from '@prisma/client';
 import { Mail } from "lucide-react";
 import React from 'react';
 import { redirect } from "next/navigation";
+import QRCode from "react-qr-code";
 
 
 const prisma = new PrismaClient();
@@ -150,7 +151,15 @@ const page = async ({ params: { id } }: Props) => {
                         ))}
                     </TableBody>
                 </Table>
+                {
+                    a.checkPoints.map((checkpoint) => (
+                        <div key={checkpoint.id} style={{ background: 'white', padding: '16px' }}>
+                            <QRCode key={checkpoint.id} id={`qr-code-${checkpoint.id}`} value={`${process.env.VERCEL_URL}/play/${checkpoint.id}`} />
+                        </div>
+                    ))
+                }
             </div>
+
         );
     }
 

@@ -7,7 +7,6 @@ import { Loader2, Rocket } from "lucide-react";
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import QRCode from "react-qr-code";
 
 
 
@@ -74,13 +73,6 @@ export default function Home() {
         Launch your adventure
         {isLoading ? <Loader2 className="ml-2 h-4 w-4 animate-spin" /> : <Rocket className="ml-2" />}
       </Button>
-
-
-      {checkpoints.map((checkpoint, index) => (
-        <div key={index} style={{ background: 'white', padding: '16px' }}>
-          <QRCode key={index} id={`qr-code-${index}`} value={checkpoint.hint} />
-        </div>
-      ))}
     </div>
   )
 }
