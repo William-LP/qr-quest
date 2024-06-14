@@ -154,7 +154,7 @@ const page = async ({ params: { id } }: Props) => {
                 {
                     a.checkPoints.map((checkpoint) => (
                         <div key={checkpoint.id} style={{ background: 'white', padding: '16px' }}>
-                            <QRCode key={checkpoint.id} id={`qr-code-${checkpoint.id}`} value={`${process.env.VERCEL_URL}/play/${checkpoint.id}`} />
+                            <QRCode key={checkpoint.id} id={`qr-code-${checkpoint.id}`} value={`${process.env.PUBLIC_URL}/play/${checkpoint.id}`} />
                         </div>
                     ))
                 }
