@@ -16,12 +16,11 @@ import { saveAs } from "file-saver";
 
 const Map = dynamic(() => import('@/components/map'), { ssr: false });
 
-
 export default function Home() {
   const [checkpoints, setCheckpoints] = useState<CheckPoint[]>([]);
   const [qrCodeCps, setQrCodeCps] = useState<CheckPoint[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const router = useRouter()
+  // const router = useRouter()
 
   const handleLaunchYourAdventure = async () => {
     setIsLoading(true)
@@ -104,7 +103,7 @@ export default function Home() {
       <div>
         {qrCodeCps.map((cp) => (
           <div key={cp.id} style={{ background: 'white', padding: '16px' }}>
-            <QRCode key={cp.id} id={`qr-code-${cp.id}`} value={`${process.env.PUBLIC_URL}/play/${cp.id}`} />
+            <QRCode key={cp.id} id={`qr-code-${cp.id}`} value={`${process.env.NEXT_PUBLIC_URL}/play/${cp.id}`} />
           </div>
         ))}
 
