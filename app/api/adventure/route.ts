@@ -42,18 +42,24 @@ export async function POST(request: NextRequest) {
             hint: cp.hint,
             name: cp.name,
             rank: cp.rank,
-            latitude: cp.lat,
-            longitude: cp.long,
+            latitude: cp.latitude,
+            longitude: cp.longitude,
             adventureId: adventure.id,
         }));
 
-        const createdCheckpoints = await prisma.checkpoint.createMany({
+        await prisma.checkpoint.createMany({
             data: checkpointsData
         });
 
 
 
-        return NextResponse.json({ adventure, createdCheckpoints }, { status: 201 });
+        const checkpoints = await prisma.checkpoint.findMany({
+            where: { adventureId: adventure.id }
+        })
+
+
+
+        return NextResponse.json({ adventure, checkpoints }, { status: 201 });
     } catch (error: any) {
         return NextResponse.json(
             { error: { name: error.name, message: error.message } },

@@ -21,8 +21,8 @@ export async function GET(
             hint: cp.hint,
             rank: cp.rank,
             name: cp.name,
-            lat: cp.latitude,
-            long: cp.longitude
+            latitude: cp.latitude,
+            longitude: cp.longitude
 
         }));
 

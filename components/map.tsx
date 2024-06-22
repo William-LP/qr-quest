@@ -42,8 +42,8 @@ const map = ({ checkpoints, setCheckpoints }: { checkpoints: CheckPoint[], setCh
                         ...checkpoints,
                         {
 
-                            lat: e.latlng.lat,
-                            long: e.latlng.lng,
+                            latitude: e.latlng.lat,
+                            longitude: e.latlng.lng,
                             rank: id,
                             hint: "",
                             name: `${e.latlng.lat} / ${e.latlng.lng}`,
@@ -70,7 +70,7 @@ const map = ({ checkpoints, setCheckpoints }: { checkpoints: CheckPoint[], setCh
                 >
                     {
                         checkpoints?.map((marker, index) => (
-                            <Marker key={index} position={[marker.lat, marker.long]} icon={customIcon}>
+                            <Marker key={index} position={[marker.latitude, marker.longitude]} icon={customIcon}>
                                 {/* <Popup style={{ padding: 0 }} >
                             <PopUpCard />
                         </Popup> */}

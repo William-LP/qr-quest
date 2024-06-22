@@ -10,6 +10,6 @@ export type CheckPoint = {
     name: string
     rank: number
     id: string
-    lat: number
-    long: number
+    latitude: number
+    longitude: number
 }
