@@ -11,7 +11,12 @@ import { useEffect, useState } from 'react';
 import QRCode from "react-qr-code";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
+import Hotjar from '@hotjar/browser';
 
+const siteId = 5033887;
+const hotjarVersion = 6;
+
+Hotjar.init(siteId, hotjarVersion);
 
 
 const Map = dynamic(() => import('@/components/map'), { ssr: false });
