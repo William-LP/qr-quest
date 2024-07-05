@@ -88,3 +88,31 @@ body {
 .leaflet-container {
   height: 100vh;
 }
+
+.glass {
+  height: 50px;
+  padding-left: 20px;
+  width: 100%;
+}
+
+.reset {
+  display: none;
+}
+
+.leaflet-bar-part {
+  display: none !important;
+}
+
+.results {
+  background-color: white;
+}
+
+.results>.active {
+  background-color: black;
+  color: white;
+}
+
+
+.leaflet-geosearch-button>form>div>div {
+  padding: 10px
+}
