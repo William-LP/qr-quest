@@ -79,7 +79,8 @@ export default function Home() {
             try {
               const pngDataUrl = await svgToPng(element);
               const pngData = pngDataUrl.split(',')[1]; // Get base64 part
-              zip.file(`${cp.rank}-${cp.name}.png`, pngData, { base64: true });
+              const filename = `${cp.rank}-${cp.name.replace(/\//g, "-")}.png`;
+              zip.file(filename, pngData, { base64: true });
             } catch (error) {
               console.error(`Error converting SVG to PNG for checkpoint ${cp.id}:`, error);
             }
