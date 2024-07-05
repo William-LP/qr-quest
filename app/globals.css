@@ -116,3 +116,8 @@ body {
 .leaflet-geosearch-button>form>div>div {
   padding: 10px
 }
+
+.leaflet-geosearch-button>form>div>div:hover {
+  background-color: black;
+  color: white;
+}
